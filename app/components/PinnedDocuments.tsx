@@ -81,9 +81,10 @@ function PinnedDocuments({
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
+      // Activate only once the pointer has actually moved, so that a press
+      // held on a card without movement still registers as a click.
       activationConstraint: {
-        delay: 100,
-        tolerance: 5,
+        distance: 5,
       },
     }),
     useSensor(KeyboardSensor, {
